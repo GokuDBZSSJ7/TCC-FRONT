@@ -1,12 +1,12 @@
 <main class="grid grid-cols-12 h-screen">
-    <div class="col-span-12 lg:col-span-3 h-screen bg-[#F8F8F8] py-5">
-        <h1 class="text-[4em] text-center">Bem-Vindo</h1>
-        <h2 class="text-center text-[1.4em]">Entre com a sua conta</h2>
+    <div class="col-span-12 md:col-span-5 h-screen bg-[#F8F8F8] py-5">
+        <h1 class="text-[2em] text-center">Bem-Vindo</h1>
+        <h2 class="text-center text-[1em]">Entre com a sua conta</h2>
 
-        <div class="flex flex-col justify-center mt-20">
+        <div class="flex flex-col justify-center mt-10">
             <p class="pl-[10%]">Email</p>
             <mat-form-field class="w-[80%] block mx-auto">
-                <mat-label>Enter your email</mat-label>
+                <mat-label>Coloque seu email</mat-label>
                 <input matInput placeholder="pat@example.com" [formControl]="email" (blur)="updateErrorMessage()"
                     required>
                 @if (email.invalid) {
@@ -15,16 +15,22 @@
             </mat-form-field>
             <p class="pl-[10%] mt-5">Senha</p>
             <mat-form-field class="w-[80%] block mx-auto">
-                <mat-label>Enter your password</mat-label>
+                <mat-label>Coloque sua senha</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
+            <div class="flex justify-between items-center">
+                <mat-checkbox class="pl-[8%] mt-0">Lembrar de mim</mat-checkbox>
+                <p class="pr-[10%]">Esqueci a senha</p>
+            </div>
+            <button class="w-[80%] block mx-auto mt-5 bg-[#1B4588] py-3 text-white rounded-[10px]">ENTRAR</button>
+            <p class="pl-[10%] mt-3 font-normal">Não possui uma conta? <span class="text-[#1B4588]">Crie aqui</span></p>
         </div>
     </div>
-    <div class="col-span-9 hidden md:block"
-        style="background-image: url('assets/img/login.png'); background-position: center;">
+    <div class="col-span-7 hidden md:block"
+        style="background-image: url('assets/img/login.png'); background-position: center; background-size: cover;">
     </div>
 </main>
