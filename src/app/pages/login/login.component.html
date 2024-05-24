@@ -1,0 +1,30 @@
+<main class="grid grid-cols-12 h-screen">
+    <div class="col-span-12 lg:col-span-3 h-screen bg-[#F8F8F8] py-5">
+        <h1 class="text-[4em] text-center">Bem-Vindo</h1>
+        <h2 class="text-center text-[1.4em]">Entre com a sua conta</h2>
+
+        <div class="flex flex-col justify-center mt-20">
+            <p class="pl-[10%]">Email</p>
+            <mat-form-field class="w-[80%] block mx-auto">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" (blur)="updateErrorMessage()"
+                    required>
+                @if (email.invalid) {
+                <mat-error>{{errorMessage}}</mat-error>
+                }
+            </mat-form-field>
+            <p class="pl-[10%] mt-5">Senha</p>
+            <mat-form-field class="w-[80%] block mx-auto">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col-span-9 hidden md:block"
+        style="background-image: url('assets/img/login.png'); background-position: center;">
+    </div>
+</main>
