@@ -1,16 +1,21 @@
 <main class="grid grid-cols-12 h-screen">
     <div class="col-span-12 lg:col-span-4 h-screen bg-[#F8F8F8] py-5">
         <h1 class="text-[3em] text-center">Bem-Vindo</h1>
-        <h2 class="text-center text-[1.4em]">Entre com a sua conta</h2>
+        <h2 class="text-center text-[1.4em]">Crie a sua conta</h2>
 
-        <div class="flex flex-col justify-center mt-20" [formGroup]="form">
+        <div class="flex flex-col justify-center mt-15" [formGroup]="form">
+            <p class="pl-[10%]">Nome</p>
+            <mat-form-field class="w-[80%] block mx-auto">
+                <mat-label>Digite seu Nome</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="nome" required>
+            </mat-form-field>
             <p class="pl-[10%]">Email</p>
             <mat-form-field class="w-[80%] block mx-auto">
                 <mat-label>Digite seu Email</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email" required>
 
             </mat-form-field>
-            <p class="pl-[10%] mt-5">Senha</p>
+            <p class="pl-[10%] mt-3">Senha</p>
             <mat-form-field class="w-[80%] block mx-auto">
                 <mat-label>Digite sua senha</mat-label>
                 <input matInput formControlName="senha" [type]="hide ? 'password' : 'text'">
@@ -23,9 +28,8 @@
                 <mat-checkbox class="example-margin">Lembrar de mim</mat-checkbox>
                 <p class="text-[#4D4D4D]">Esqueci minha senha</p>
             </div>
-            <button (click)="login()"
-                class="bg-[#1B4588] w-[80%] block mx-auto h-[50px] mt-5 text-[#FFF] rounded-[10px]">ENTRAR</button>
-            <p routerLink="/register">Não tem uma conta? Crie aqui!</p>
+            <button (click)="register()"
+                class="bg-[#1B4588] w-[80%] block mx-auto h-[50px] mt-5 text-[#FFF] rounded-[10px]">CADASTRAR</button>
         </div>
     </div>
     <div class="col-span-8 hidden md:block"

@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { merge } from 'rxjs';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-// import { AuthService } from '../../services/auth.service';
-import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { Router } from '@angular/router';
+import { merge } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -24,24 +23,31 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    RouterModule
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class LoginComponent {
+export class RegisterComponent {
   form!: FormGroup;
   errorMsg: string = '';
 
   errorMessage = '';
   hide = true
 
-  constructor(private fb: FormBuilder, private spinner: NgxSpinnerService, private authGuard: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private authGuard: AuthService,
+    private router: Router,
+    private userService: UserService
+  ) {
+
     this.createForm();
   }
 
   createForm() {
     this.form = this.fb.group({
+      nome: [null, [Validators.required]],
       email: [null, [Validators.required]],
       senha: [null, [Validators.required]],
     });
@@ -49,12 +55,12 @@ export class LoginComponent {
   }
 
 
-  login() {
+  register() {
     this.spinner.show();
-    this.authGuard.login(this.form.value).subscribe({
+    this.userService.register(this.form.value).subscribe({
       next: () => {
         this.spinner.hide();
-        // this.router.navigate(['/events']);
+        this.router.navigate(['/events']);
       },
       error: (err) => {
         this.errorMsg = err.error.message;
